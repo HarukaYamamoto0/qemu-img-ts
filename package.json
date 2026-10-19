@@ -1,0 +1,14 @@
+{
+  "name": "qemu-img-ts",
+  "version": "1.0.0",
+  "private": false,
+  "description": "A TypeScript wrapper for the qemu-img command-line utility, enabling programmatic disk image creation, conversion, inspection, and management.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
