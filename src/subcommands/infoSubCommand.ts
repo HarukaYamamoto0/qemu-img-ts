@@ -68,7 +68,7 @@ export async function infoSubCommand(options: InfoImageOptions): Promise<BlockGr
 	}
 }
 
-interface BlockGraphInfo {
+export interface BlockGraphInfo {
 	filename: string;
 	format: string;
 	virtualSize: number;
