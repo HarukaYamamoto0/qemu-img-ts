@@ -1,9 +1,10 @@
-import { runner } from '../core/runner';
-import type { ImageFormat, Qcow2Options, RawOptions } from '../types';
-import { objectToParams } from '../helpers/objectToParams';
+import type { ImageFormat } from '@core/ImageFormat';
+import type { QemuObjectOptions } from '../types';
+import { objectToParams } from '@helpers/objectToParams';
+import { runner } from '@core/runner';
 
 export interface InfoImageOptions {
-	object?: Qcow2Options | RawOptions;
+	object?: QemuObjectOptions;
 	imageOpts?: boolean;
 	format?: ImageFormat;
 	backingChain?: boolean;

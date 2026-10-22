@@ -1,12 +1,46 @@
+// noinspection GrazieInspection
+
 /**
- * Converts an object into a string of key-value pairs separated by a specified divider.
+ * Converts an object into a comma-separated string of key-value pairs.
+ * Nested objects are flattened using dot notation.
  *
- * @param {object} item The object to be converted into a string of key-value pairs.
- * @param {string} [divider=','] The string used to separate keys and values. Defaults to ','.
- * @return {string} A string representation of the object's key-value pairs.
+ * @example
+ * ```ts
+ * const options = {
+ *     driver: 'qcow2',
+ *     size: '1G',
+ *     encrypt: {
+ *         format: 'luks',
+ *         key: {
+ *             secret: 'sec0',
+ *         },
+ *     },
+ *     lazy_refcounts: true,
+ * };
+ *
+ * console.log(objectToParams(options)); // driver=qcow2,size=1G,encrypt.format=luks,encrypt.key.secret=sec0,lazy_refcounts=true
+ * ```
+ *
+ * @param {object} item The object to convert.
+ * @param {string} [divider='='] The separator between keys and values.
+ * @returns {string} The flattened key-value pairs.
  */
-export function objectToParams(item: object, divider: string = ','): string {
-	return Object.entries(item)
-		.map(([key, value]) => `${key}${divider}${value}`)
-		.join(',');
+export function objectToParams(item: object, divider: string = '='): string {
+	const params: string[] = [];
+
+	const flatten = (obj: object, prefix: string = ''): void => {
+		for (const [key, value] of Object.entries(obj)) {
+			const path = prefix ? `${prefix}.${key}` : key;
+
+			if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
+				flatten(value, path);
+			} else if (value !== undefined) {
+				params.push(`${path}${divider}${value}`);
+			}
+		}
+	};
+
+	flatten(item);
+
+	return params.join(',');
 }

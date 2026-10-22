@@ -1,8 +1,8 @@
 # Ignore artifacts:
 coverage
 node_modules
-dist
-docs
+/dist
+/docs
 
 /tmp
 /out-tsc
@@ -16,6 +16,6 @@ docs
 parse.ts
 tests.ts
 scratch.txt
-.github
-*.yml
+/.github
+/*.yml
 *.md

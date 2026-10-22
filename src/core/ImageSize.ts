@@ -2,6 +2,15 @@
  * The ImageSize class represents a file size in bytes and provides static methods
  * to create instances from common file size units such as gigabytes (GB), gibibytes (GiB),
  * megabytes (MB), and mebibytes (MiB). It encapsulates the size as an immutable value.
+ *
+ * @example
+ * ```ts
+ * await qemu.create({
+ * 	filename: 'disk-test.img',
+ * 	size: ImageSize.mb(64),
+ * 	format: ImageFormat.RAW,
+ * });
+ * ```
  */
 export class ImageSize {
 	private constructor(readonly bytes: bigint) {

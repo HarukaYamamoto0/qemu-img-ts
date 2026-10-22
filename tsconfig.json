@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"baseUrl": "./src",
 		"target": "ESNext",
 		"module": "ESNext",
 		"moduleResolution": "bundler",
@@ -25,7 +26,12 @@
 		"declarationMap": true,
 		"resolveJsonModule": true,
 		"isolatedModules": true,
-		"verbatimModuleSyntax": true
+		"verbatimModuleSyntax": true,
+		"paths": {
+			"@core/*": ["core/*"],
+			"@helpers/*": ["helpers/*"],
+			"@subcommands/*": ["subcommands/*"]
+		}
 	},
 	"include": ["src/**/*.ts"]
 }
