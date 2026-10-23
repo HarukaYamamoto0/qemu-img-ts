@@ -25,21 +25,17 @@ qemu-img --version
 ## Usage
 
 ```ts
-import {ImageSize, QemuImg} from "qemu-img-ts";
-import type {BlockGraphInfo} from "qemu-img-ts";
+import { type BlockGraphInfo, ImageFormat, ImageSize, QemuImg } from 'qemu-img-ts';
 
 const qemu = new QemuImg();
 
 await qemu.create({
-	format: "raw",
-	outputPath: "./",
-	filename: "disk-test.img",
+	format: ImageFormat.RAW,
+	filename: 'disk-test.img',
 	size: ImageSize.mb(64),
 });
 
-const info: BlockGraphInfo | BlockGraphInfo[] = await qemu.info({
-	filename: "disk-test.img",
-});
+const info: BlockGraphInfo | BlockGraphInfo[] = await qemu.info({ filename: 'disk-test.img' });
 
 if (Array.isArray(info)) {
 	console.log(info[0]?.format);
@@ -87,8 +83,8 @@ the same operation can be expressed as:
 
 ```ts
 await qemu.create({
-	format: "raw",
-	filename: "disk.img",
+	format: ImageFormat.RAW,
+	filename: 'disk-test.img',
 	size: ImageSize.mb(64),
 });
 ```
