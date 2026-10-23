@@ -73,7 +73,7 @@ export interface CreateImageOptions {
 	 * @example
 	 * "10G"
 	 */
-	size: ImageSize;
+	size: ImageSize; // TODO: should be optional, but it does require some form of validation.
 }
 
 /**
