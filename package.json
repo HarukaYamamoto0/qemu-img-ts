@@ -1,6 +1,6 @@
 {
 	"name": "qemu-img-ts",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "A TypeScript wrapper for the qemu-img command-line utility, enabling programmatic disk image creation, conversion, inspection, and management.",
 	"type": "module",
 	"main": "./dist/index.js",
@@ -16,13 +16,15 @@
 	],
 	"scripts": {
 		"prepublishOnly": "bun run build",
-		"build": "bunx tsc",
+		"typecheck": "tsc --noEmit",
+		"build:js": "bun build ./src/index.ts --target=bun --outdir=dist --packages=external",
+		"build:types": "tsc --emitDeclarationOnly",
+		"build": "bun run typecheck && bun run build:js && bun run build:types",
 		"test": "bun test",
 		"lint": "bunx eslint . --ext .ts --cache --cache-strategy content",
 		"lint:fix": "bunx eslint . --ext .ts --fix --cache --cache-strategy content",
 		"format": "bunx prettier --check . --cache --cache-strategy content",
-		"format:fix": "bunx prettier --write . --cache --cache-strategy content",
-		"typecheck": "tsc --noEmit"
+		"format:fix": "bunx prettier --write . --cache --cache-strategy content"
 	},
 	"repository": {
 		"type": "git",
@@ -60,6 +62,7 @@
 		"eslint-config-prettier": "^10.1.8",
 		"globals": "^17.13.0",
 		"prettier": "^3.9.10",
+		"tsc-alias": "^1.9.9",
 		"typescript": "^6.0.3",
 		"typescript-eslint": "^8.62.1"
 	}
