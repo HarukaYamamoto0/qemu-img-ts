@@ -1,6 +1,10 @@
-// noinspection JSUnusedGlobalSymbols
+// noinspection JSUnusedGlobalSymbols,GrazieInspection,SpellCheckingInspection
 
-import type { ImageSize } from './ImageSize';
+// qemu-img create -f raw -o help disk-test.img
+// In this case, I made frequent use of this command to check the available options
+// it’s better than having to consult the confusing qemu-img documentation.
+
+import type { ImageSize } from '@core/ImageSize';
 
 // Represents the supported image formats for virtual disk files
 export enum ImageFormat {
@@ -18,19 +22,24 @@ export enum ImageFormat {
 
 /**
  * Just a parent class used as a generic interface; use the interfaces that inherit from this interface
- * it has the prefix `Options`, for example, `OptionsRaw`, `OptionsQcow2`, etc.
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface ImageOptions {}
 
 // Supported raw options
-export interface OptionsRaw extends ImageOptions {
+export interface RawImageOptions extends ImageOptions {
+	// extent size hint for the image file, 0 to disable
+	extent_size_hint: ImageSize;
+	// turn off copy-on-write (valid only on btrfs)
+	nocow: boolean;
+	// preallocation mode (allowed values: off, falloc, full)
+	preallocation: 'off' | 'falloc' | 'full';
 	// Size of the virtual disk
 	size: ImageSize;
 }
 
-// Supported raw options
-export interface OptionsQcow2 extends ImageOptions {
+// Supported qcow2 options
+export interface Qcow2ImageOptions extends ImageOptions {
 	// Path or filename of the base backing image
 	backing_file: string;
 	// Format of the base backing image
@@ -78,7 +87,7 @@ export interface OptionsQcow2 extends ImageOptions {
 }
 
 // Supported luks options
-export interface OptionsLuks extends ImageOptions {
+export interface LuksImageOptions extends ImageOptions {
 	// Cipher algorithm used for encryption
 	cipher_alg: string;
 	// Cipher mode used for encryption
@@ -98,7 +107,7 @@ export interface OptionsLuks extends ImageOptions {
 }
 
 // Supported qed options
-export interface OptionsQed extends ImageOptions {
+export interface QedImageOptions extends ImageOptions {
 	// Path or filename of the base backing image
 	backing_file: string;
 	// Format of the base backing image
@@ -112,7 +121,7 @@ export interface OptionsQed extends ImageOptions {
 }
 
 // Supported qcow options
-export interface OptionsQcow extends ImageOptions {
+export interface QcowImageOptions extends ImageOptions {
 	// Path or filename of the base backing image
 	backing_file: string;
 	// Format of the backing image
@@ -130,7 +139,7 @@ export interface OptionsQcow extends ImageOptions {
 }
 
 // Supported vdi options
-export interface OptionsVdi extends ImageOptions {
+export interface VdiImageOptions extends ImageOptions {
 	// Size of the virtual disk
 	size: ImageSize;
 	// Pre-allocate a static VDI image
@@ -138,7 +147,7 @@ export interface OptionsVdi extends ImageOptions {
 }
 
 // Supported vmdk options
-export interface OptionsVmdk extends ImageOptions {
+export interface VmdkImageOptions extends ImageOptions {
 	// Virtual adapter type: ide (default), lsilogic, buslogic, or legacyESX
 	adapter_type: string;
 	// Path or filename of the base backing image
@@ -160,7 +169,7 @@ export interface OptionsVmdk extends ImageOptions {
 }
 
 // Supported vpc options
-export interface OptionsVpc extends ImageOptions {
+export interface VpcImageOptions extends ImageOptions {
 	// Force the exact disk size rather than rounding to the nearest CHS geometry
 	force_size: boolean;
 	// Size of the virtual disk
@@ -170,7 +179,7 @@ export interface OptionsVpc extends ImageOptions {
 }
 
 // Supported VHDX options
-export interface OptionsVhdx extends ImageOptions {
+export interface VhdxImageOptions extends ImageOptions {
 	// Block size between 1MB and 256MB (0 auto-calculates from image size)
 	block_size: ImageSize;
 	// Force payload blocks of the type 'ZERO' (default). Do not disable with qemu-img convert and subformat=dynamic

@@ -1,4 +1,7 @@
+// noinspection SpellCheckingInspection
+
 import type { ImageFormat } from '@core/ImageFormat';
+import type { ImageSize } from '@core/ImageSize';
 
 /**
  * Configures the backing image (`-b`, `-F`, `-u`).
@@ -18,3 +21,12 @@ export interface BackingImage {
 }
 
 export type QemuObjectOptions = Record<string, unknown>;
+
+/**
+ * options passed to the `-o` parameter
+ */
+export interface RawRuntimeOptions {
+	
+	// virtual disk size
+	size: ImageSize;
+}

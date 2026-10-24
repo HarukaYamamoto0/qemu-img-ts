@@ -22,10 +22,17 @@ You can verify it with:
 qemu-img --version
 ```
 
+The version used as a base is this one:
+
+```bash
+qemu-img version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+Copyright (c) 2003-2023 Fabrice Bellard and the QEMU Project developers
+```
+
 ## Usage
 
 ```ts
-import { type BlockGraphInfo, ImageFormat, ImageSize, QemuImg } from 'qemu-img-ts';
+import {type BlockGraphInfo, ImageFormat, ImageSize, QemuImg} from 'qemu-img-ts';
 
 const qemu = new QemuImg();
 
@@ -35,7 +42,7 @@ await qemu.create({
 	size: ImageSize.mb(64),
 });
 
-const info: BlockGraphInfo | BlockGraphInfo[] = await qemu.info({ filename: 'disk-test.img' });
+const info: BlockGraphInfo | BlockGraphInfo[] = await qemu.info({filename: 'disk-test.img'});
 
 if (Array.isArray(info)) {
 	console.log(info[0]?.format);

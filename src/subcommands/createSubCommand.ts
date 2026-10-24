@@ -61,17 +61,6 @@ export interface CreateImageOptions {
 
 	/**
 	 * Specifies the virtual disk size.
-	 *
-	 * Supports sizes in bytes and QEMU size suffixes such as
-	 * `K`, `M`, `G`, and `T`.
-	 *
-	 * The size may be omitted when a backing image is provided
-	 * or when specified through format-specific options.
-	 *
-	 * @example
-	 * "64M"
-	 * @example
-	 * "10G"
 	 */
 	size: ImageSize; // TODO: should be optional, but it does require some form of validation.
 }
