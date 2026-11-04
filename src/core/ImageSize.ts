@@ -1,7 +1,7 @@
 /**
  * The ImageSize class represents a file size in bytes and provides static methods
  * to create instances from common file size units such as gigabytes (GB), gibibytes (GiB),
- * megabytes (MB), and mebibytes (MiB). It encapsulates the size as an immutable value.
+ * megabytes (MB), and mebibyte (MiB). It encapsulates the size as an immutable value.
  *
  * @example
  * ```ts
@@ -48,9 +48,9 @@ export class ImageSize {
 	}
 
 	/**
-	 * Converts a given value in mebibytes (MiB) to an ImageSize instance.
+	 * Converts a given value in mebibyte (MiB) to an ImageSize instance.
 	 *
-	 * @param {number} value - The value in mebibytes to be converted.
+	 * @param {number} value - The value in mebibyte to be converted.
 	 * @return {ImageSize} An ImageSize instance representing the value in bytes.
 	 */
 	static mib(value: number): ImageSize {
